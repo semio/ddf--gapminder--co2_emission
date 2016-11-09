@@ -4,6 +4,6 @@ indicator_url,Indicator URL,string,,
 unit,Unit,string,,
 country,Country,entity_domain,,
 year,Year,time,,
-yearly_co2_emissions_1000_tonnes,Yearly CO2 emissions,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,1000 tonnes
-cumulative_co2_emissions_tonnes,Cumulative CO2 emissions,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,tonnes
-co2_emissions_tonnes_per_person,CO2 per capita,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,tonnes per person
+yearly_co2_emissions_1000_tonnes,Yearly CO2 emissions,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,1000 mertic tons
+cumulative_co2_emissions_tonnes,Cumulative CO2 emissions,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,mertic tons
+co2_emissions_tonnes_per_person,CO2 per capita,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,metric tons per person
