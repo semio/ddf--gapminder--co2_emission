@@ -36,9 +36,13 @@ description: Cumulative carbon dioxide emissions from fossil fuel consumption, c
 
 ## Versions
 
-Current version: 20161108
+Current version: 20161111
 
 ### Revision history
+
+#### 20161111
+
+merge and split certain countries to match Gapminder's geo domain. More detains in #1
 
 #### 20161108
 
