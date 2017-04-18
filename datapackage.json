@@ -134,7 +134,7 @@
             {
                 "primaryKey": ["country"],
                 "value": "name",
-                "resources": ["ddf--concepts"]
+                "resources": ["ddf--entities--country"]
             }
         ],
         "datapoints": [
