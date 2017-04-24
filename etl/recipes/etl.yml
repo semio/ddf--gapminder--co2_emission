@@ -1,0 +1,124 @@
+## Please note that this recipe is only for demo purpose. Because we need to deal
+## with merge/split of countries in the source data and this function is not yet
+## in the Chef.
+
+info:
+    id: ddf--gapminder--co2_emission
+    base:
+        - &d1 ddf--cdiac--co2
+        - &d2 ddf--gapminder--population
+        - &d3 ddf--gapminder--geo_entity_domain
+
+config:
+    ddf_dir: /Users/semio/src/work/Gapminder/
+    recipe_dir: ./
+
+ingredients:
+    - id: cdiac-datapoints
+      dataset: *d1
+      key: nation, year
+      value:
+          - total_carbon_emissions
+    - id: cdiac-entities
+      dataset: *d1
+      key: nation
+      value: "*"
+    - id: gapminder-datapoints
+      dataset: *d2
+      key: country, year
+      value:
+        - population
+    - id: gapminder-entities
+      dataset: *d3
+      key: country
+      value: "*"
+
+cooking:
+    datapoints:
+        - procedure: translate_column
+          ingredients:
+              - cdiac-entities
+          options:
+              column: name
+              target_column: geo
+              dictionary:
+                  key: ['name', 'gapminder_list','alternative_1', 'alternative_2', 'alternative_3',
+                        'alternative_4_cdiac', 'pandg', 'god_id', 'alt_5', 'upper_case_name', 'arb1', 
+                        'arb2', 'arb3', 'arb4', 'arb5', 'arb6'] 
+                  value: country
+                  base: gapminder-entities
+              not_found: drop
+              ignore_case: true
+          result: geo-entities-aligned
+
+        - procedure: translate_column
+          ingredients:
+              - cdiac-datapoints
+          options:
+              column: nation
+              target_column: nation
+              dictionary:
+                  key: nation
+                  value: geo
+                  base: geo-entities-aligned
+              not_found: drop
+          result: cdiac-datapoints-aligned
+
+        - procedure: translate_header
+          ingredients:
+              - cdiac-datapoints-aligned
+          options:
+              dictionary:
+                  nation: country
+          result: cdiac-datapoints-translated
+
+        - procedure: run_op
+          ingredients:
+              - cdiac-datapoints-translated
+          options:
+              op:
+                  yearly_co2_emissions_1000_tonnes: total_carbon_emissions * 3.667
+          result: total_emissions-datapoints
+
+        # create a new ingredient with co2 and population in it.
+        - procedure: merge 
+          ingredients:
+              - total_emissions-datapoints
+              - gapminder-datapoints
+          result: co2-and-pop-datapoints
+
+        - procedure: run_op
+          ingredients:
+              - co2-and-pop-datapoints
+          options:
+              op:
+                  co2_emissions_tonnes_per_person: yearly_co2_emissions_1000_tonnes / population * 1000
+          result: co2_per_cap-datapoints
+
+        - procedure: window
+          ingredients:
+              - total_emissions-datapoints
+          options:
+              window:
+                  size: expanding
+                  column: year
+              aggregate:
+                  yearly_co2_emissions_1000_tonnes: sum
+
+          result: total_emission_cumsum-datapoints
+
+        - procedure: run_op
+          ingredients:
+              - total_emission_cumsum-datapoints
+          options:
+              op:
+                  cumulative_co2_emissions_tonnes: yearly_co2_emissions_1000_tonnes * 1000
+          result: total_emission_cumsum-datapoints-final
+
+
+        - procedure: serve
+          ingredients:
+              - total_emission_cumsum-datapoints-final
+              - co2_per_cap-datapoints
+              - total_emissions-datapoints
+        
