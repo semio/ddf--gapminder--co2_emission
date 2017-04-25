@@ -12,6 +12,7 @@ info:
 config:
     ddf_dir: /Users/semio/src/work/Gapminder/
     recipe_dir: ./
+    dictionary_dir: ./translation_dictionaries
 
 ingredients:
     - id: cdiac-datapoints
@@ -35,6 +36,27 @@ ingredients:
 
 cooking:
     datapoints:
+        # merge / split countries
+        - procedure: merge_entity
+          ingredients:
+              - cdiac-datapoints
+          options:
+              dictionary: country_merge.json
+              merged: keep
+              target_column: nation
+          result: cdiac-datapoints-country-merged
+
+        - procedure: split_entity
+          ingredients:
+              - cdiac-datapoints-country-merged
+          options:
+              dictionary: country_split.json
+              splitted: keep
+              target_column: nation
+              debug: true
+          result: cdiac-datapoints-country-merged-splitted
+
+        # adapt to Gapminder's geo
         - procedure: translate_column
           ingredients:
               - cdiac-entities
@@ -44,16 +66,17 @@ cooking:
               dictionary:
                   key: ['name', 'gapminder_list','alternative_1', 'alternative_2', 'alternative_3',
                         'alternative_4_cdiac', 'pandg', 'god_id', 'alt_5', 'upper_case_name', 'arb1', 
-                        'arb2', 'arb3', 'arb4', 'arb5', 'arb6'] 
+                        'arb2', 'arb3', 'arb4', 'arb5', 'arb6', 'country'] 
                   value: country
                   base: gapminder-entities
               not_found: drop
               ignore_case: true
+              debug: true
           result: geo-entities-aligned
 
         - procedure: translate_column
           ingredients:
-              - cdiac-datapoints
+              - cdiac-datapoints-country-merged-splitted
           options:
               column: nation
               target_column: nation
@@ -62,6 +85,7 @@ cooking:
                   value: geo
                   base: geo-entities-aligned
               not_found: drop
+              debug: true
           result: cdiac-datapoints-aligned
 
         - procedure: translate_header
@@ -78,6 +102,7 @@ cooking:
           options:
               op:
                   yearly_co2_emissions_1000_tonnes: total_carbon_emissions * 3.667
+              debug: true
           result: total_emissions-datapoints
 
         # create a new ingredient with co2 and population in it.
@@ -115,10 +140,38 @@ cooking:
                   cumulative_co2_emissions_tonnes: yearly_co2_emissions_1000_tonnes * 1000
           result: total_emission_cumsum-datapoints-final
 
-
-        - procedure: serve
+        - procedure: merge
           ingredients:
               - total_emission_cumsum-datapoints-final
               - co2_per_cap-datapoints
               - total_emissions-datapoints
-        
+          result: datapoints_all
+        - procedure: filter_item
+          ingredients:
+              - datapoints_all
+          options:
+              items:
+                  - yearly_co2_emissions_1000_tonnes
+                  - cumulative_co2_emissions_tonnes
+                  - co2_emissions_tonnes_per_person
+          result: datapoints-to-serve
+
+        - procedure: serve
+          ingredients:
+              - datapoints-to-serve
+
+    entities:
+        - procedure: serve
+          ingredients:
+              - gapminder-entities
+
+    concepts:
+        - procedure: extract_concepts
+          ingredients:
+              - datapoints-to-serve
+              - gapminder-entities
+          result: concepts-to-serve
+        - procedure: serve
+          ingredients:
+              - concepts-to-serve
+
