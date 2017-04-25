@@ -1,13 +1,10 @@
-## Please note that this recipe is only for demo purpose. Because we need to deal
-## with merge/split of countries in the source data and this function is not yet
-## in the Chef.
-
 info:
     id: ddf--gapminder--co2_emission
     base:
         - &d1 ddf--cdiac--co2
         - &d2 ddf--gapminder--population
         - &d3 ddf--gapminder--geo_entity_domain
+        - &d4 ddf--gapminder--systema_globalis
 
 config:
     ddf_dir: /Users/semio/src/work/Gapminder/
@@ -33,6 +30,15 @@ ingredients:
       dataset: *d3
       key: country
       value: "*"
+    - id: gapminder-concepts
+      dataset: *d4
+      key: concept
+      value: "*"
+      row_filter:
+          concept: 
+              - yearly_co2_emissions_1000_tonnes
+              - cumulative_co2_emissions_tonnes
+              - co2_emissions_tonnes_per_person
 
 cooking:
     datapoints:
@@ -66,7 +72,7 @@ cooking:
               dictionary:
                   key: ['name', 'gapminder_list','alternative_1', 'alternative_2', 'alternative_3',
                         'alternative_4_cdiac', 'pandg', 'god_id', 'alt_5', 'upper_case_name', 'arb1', 
-                        'arb2', 'arb3', 'arb4', 'arb5', 'arb6', 'country'] 
+                        'arb2', 'arb3', 'arb4', 'arb5', 'arb6'] 
                   value: country
                   base: gapminder-entities
               not_found: drop
@@ -170,6 +176,13 @@ cooking:
           ingredients:
               - datapoints-to-serve
               - gapminder-entities
+          result: concepts_extracted
+        - procedure: merge
+          ingredients:
+              - concepts_extracted
+              - gapminder-concepts
+          options:
+              deep: true
           result: concepts-to-serve
         - procedure: serve
           ingredients:
