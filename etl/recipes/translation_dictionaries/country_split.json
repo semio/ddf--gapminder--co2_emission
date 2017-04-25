@@ -1,28 +1,8 @@
 {
-    "east_west_pakistan": {
-        "split": ["pakistan", "bangladesh"],
-        "at": {
-            "year": 1972
-        }
-    },
-    "yugoslavia_montenegro_serbia": {
-        "split": ["montenegro", "serbia"],
-        "at": {
-            "year": 2006
-        }
-    },
-    "czechoslovakia": {
-        "split": ["czech_republic", "slovakia"],
-        "at": {
-            "year": 1992
-        }
-    },
-    "ussr": {
-        "split": ["ukraine", "russian_federation", "belarus", "armenia", "azerbaijan",
-                  "georgia", "kazakhstan", "kyrgyzstan", "lithuania",
-                  "republic_of_moldova", "tajikistan", "turkmenistan", "uzbekistan"],
-        "at": {
-            "year": 1992
-        }
-    }
+    "east_west_pakistan": ["pakistan", "bangladesh"],
+    "yugoslavia_montenegro_serbia": ["montenegro", "serbia"],
+    "czechoslovakia": ["czech_republic", "slovakia"],
+    "ussr": ["ukraine", "russian_federation", "belarus", "armenia", "azerbaijan",
+             "georgia", "kazakhstan", "kyrgyzstan", "lithuania",
+             "republic_of_moldova", "tajikistan", "turkmenistan", "uzbekistan"]
 }
