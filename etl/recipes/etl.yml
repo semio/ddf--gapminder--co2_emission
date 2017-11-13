@@ -34,8 +34,8 @@ ingredients:
       dataset: *d4
       key: concept
       value: "*"
-      row_filter:
-          concept: 
+      filter:
+          concept:
               - yearly_co2_emissions_1000_tonnes
               - cumulative_co2_emissions_tonnes
               - co2_emissions_tonnes_per_person
@@ -152,11 +152,11 @@ cooking:
               - co2_per_cap-datapoints
               - total_emissions-datapoints
           result: datapoints_all
-        - procedure: filter_item
+        - procedure: filter
           ingredients:
               - datapoints_all
           options:
-              items:
+              item:
                   - yearly_co2_emissions_1000_tonnes
                   - cumulative_co2_emissions_tonnes
                   - co2_emissions_tonnes_per_person
@@ -170,6 +170,8 @@ cooking:
         - procedure: serve
           ingredients:
               - gapminder-entities
+          options:
+            no_keep_sets: true
 
     concepts:
         - procedure: extract_concepts
