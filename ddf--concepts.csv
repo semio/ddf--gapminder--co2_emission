@@ -1,9 +1,35 @@
-concept,name,concept_type,indicator_url,unit
-name,Name,string,,
-indicator_url,Indicator URL,string,,
-unit,Unit,string,,
-country,Country,entity_domain,,
-year,Year,time,,
-yearly_co2_emissions_1000_tonnes,Yearly CO2 emissions,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,1000 metric tons
-cumulative_co2_emissions_tonnes,Cumulative CO2 emissions,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,metric tons
-co2_emissions_tonnes_per_person,CO2 per capita,measure,https://github.com/open-numbers/ddf--gapminder--co2_emission,metric tons per person
+concept,color,concept_type,description,domain,drill_up,indicator_url,interpolation,name,name_catalog,name_short,scales,tags
+alt_5,,string,,,,,,Alt 5,,,,
+alternative_1,,string,,,,,,Alternative 1,,,,
+alternative_2,,string,,,,,,Alternative 2,,,,
+alternative_3,,string,,,,,,Alternative 3,,,,
+alternative_4_cdiac,,string,,,,,,Alternative 4 Cdiac,,,,
+arb1,,string,,,,,,Arb1,,,,
+arb2,,string,,,,,,Arb2,,,,
+arb3,,string,,,,,,Arb3,,,,
+arb4,,string,,,,,,Arb4,,,,
+arb5,,string,,,,,,Arb5,,,,
+arb6,,string,,,,,,Arb6,,,,
+co2_emissions_tonnes_per_person,,measure,Carbon dioxide emissions from the burning of fossil fuels (metric tonnes of CO2 per person).,,,https://github.com/open-numbers/ddf--gapminder--co2_emission,,CO2 emissions (tonnes per person),CO2 emissions,CO2 emissions,"[""log"", ""linear""]","_root, emissions"
+cumulative_co2_emissions_tonnes,,measure,Total CO2 emissions from fossil fuel for the period between 1751 and the relevant year in metric tonnes.,,,https://github.com/open-numbers/ddf--gapminder--co2_emission,,Cumulative CO2 emissions (tonnes),Cumulative CO2 emissions,Cumulative CO2 emissions,"[""log"", ""linear""]",emissions
+g77_and_oecd_countries,,string,,,,,,G77 And Oecd Countries,,,,
+gapminder_list,,string,,,,,,Gapminder List,,,,
+god_id,,string,,,,,,God Id,,,,
+gwid,,string,,,,,,Gwid,,,,
+income_groups,,string,,,,,,Income Groups,,,,
+iso3166_1_alpha2,,string,,,,,,Iso3166 1 Alpha2,,,,
+iso3166_1_alpha3,,string,,,,,,Iso3166 1 Alpha3,,,,
+iso3166_1_numeric,,string,,,,,,Iso3166 1 Numeric,,,,
+iso3166_2,,string,,,,,,Iso3166 2,,,,
+landlocked,,string,,,,,,Landlocked,,,,
+latitude,,string,,,,,,Latitude,,,,
+longitude,,string,,,,,,Longitude,,,,
+main_religion_2008,,string,,,,,,Main Religion 2008,,,,
+name,,string,,,,,,Name,,,,
+pandg,,string,,,,,,Pandg,,,,
+un_state,,string,,,,,,Un State,,,,
+unicode_region_subtag,,string,,,,,,Unicode Region Subtag,,,,
+upper_case_name,,string,,,,,,Upper Case Name,,,,
+world_4region,,string,,,,,,World 4Region,,,,
+world_6region,,string,,,,,,World 6Region,,,,
+yearly_co2_emissions_1000_tonnes,,measure,Total carbon dioxide emissions from the burning of fossil fuels during the given year (1000 metric tonnes of CO2).,,,https://github.com/open-numbers/ddf--gapminder--co2_emission,,Yearly CO2 emissions (1000 tonnes),CO2 emissions yearly,CO2 emissions,"[""linear"", ""log""]",emissions

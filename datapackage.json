@@ -3,29 +3,27 @@
     "language": {
         "id": "en"
     },
+    "created": "2017-12-10T23:45:38.674507+00:00",
     "resources": [
         {
-            "path": "ddf--concepts.csv",
-            "name": "ddf--concepts",
+            "path": "ddf--datapoints--yearly_co2_emissions_1000_tonnes--by--country--year.csv",
+            "name": "ddf--datapoints--yearly_co2_emissions_1000_tonnes--by--country--year",
             "schema": {
                 "fields": [
                     {
-                        "name": "concept"
+                        "name": "country"
                     },
                     {
-                        "name": "name"
+                        "name": "year"
                     },
                     {
-                        "name": "concept_type"
-                    },
-                    {
-                        "name": "indicator_url"
-                    },
-                    {
-                        "name": "unit"
+                        "name": "yearly_co2_emissions_1000_tonnes"
                     }
                 ],
-                "primaryKey": "concept"
+                "primaryKey": [
+                    "country",
+                    "year"
+                ]
             }
         },
         {
@@ -50,6 +48,159 @@
             }
         },
         {
+            "path": "ddf--concepts.csv",
+            "name": "ddf--concepts",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "concept"
+                    },
+                    {
+                        "name": "color"
+                    },
+                    {
+                        "name": "concept_type"
+                    },
+                    {
+                        "name": "description"
+                    },
+                    {
+                        "name": "domain"
+                    },
+                    {
+                        "name": "drill_up"
+                    },
+                    {
+                        "name": "indicator_url"
+                    },
+                    {
+                        "name": "interpolation"
+                    },
+                    {
+                        "name": "name"
+                    },
+                    {
+                        "name": "name_catalog"
+                    },
+                    {
+                        "name": "name_short"
+                    },
+                    {
+                        "name": "scales"
+                    },
+                    {
+                        "name": "tags"
+                    }
+                ],
+                "primaryKey": "concept"
+            }
+        },
+        {
+            "path": "ddf--entities--country.csv",
+            "name": "ddf--entities--country",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "world_6region"
+                    },
+                    {
+                        "name": "income_groups"
+                    },
+                    {
+                        "name": "landlocked"
+                    },
+                    {
+                        "name": "g77_and_oecd_countries"
+                    },
+                    {
+                        "name": "main_religion_2008"
+                    },
+                    {
+                        "name": "gapminder_list"
+                    },
+                    {
+                        "name": "alternative_1"
+                    },
+                    {
+                        "name": "alternative_2"
+                    },
+                    {
+                        "name": "alternative_3"
+                    },
+                    {
+                        "name": "alternative_4_cdiac"
+                    },
+                    {
+                        "name": "pandg"
+                    },
+                    {
+                        "name": "god_id"
+                    },
+                    {
+                        "name": "alt_5"
+                    },
+                    {
+                        "name": "upper_case_name"
+                    },
+                    {
+                        "name": "iso3166_1_alpha2"
+                    },
+                    {
+                        "name": "iso3166_1_alpha3"
+                    },
+                    {
+                        "name": "iso3166_1_numeric"
+                    },
+                    {
+                        "name": "iso3166_2"
+                    },
+                    {
+                        "name": "arb1"
+                    },
+                    {
+                        "name": "arb2"
+                    },
+                    {
+                        "name": "arb3"
+                    },
+                    {
+                        "name": "arb4"
+                    },
+                    {
+                        "name": "arb5"
+                    },
+                    {
+                        "name": "arb6"
+                    },
+                    {
+                        "name": "un_state"
+                    },
+                    {
+                        "name": "world_4region"
+                    },
+                    {
+                        "name": "unicode_region_subtag"
+                    },
+                    {
+                        "name": "gwid"
+                    },
+                    {
+                        "name": "latitude"
+                    },
+                    {
+                        "name": "longitude"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "country"
+            }
+        },
+        {
             "path": "ddf--datapoints--cumulative_co2_emissions_tonnes--by--country--year.csv",
             "name": "ddf--datapoints--cumulative_co2_emissions_tonnes--by--country--year",
             "schema": {
@@ -69,89 +220,430 @@
                     "year"
                 ]
             }
-        },
-        {
-            "path": "ddf--datapoints--yearly_co2_emissions_1000_tonnes--by--country--year.csv",
-            "name": "ddf--datapoints--yearly_co2_emissions_1000_tonnes--by--country--year",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "country"
-                    },
-                    {
-                        "name": "year"
-                    },
-                    {
-                        "name": "yearly_co2_emissions_1000_tonnes"
-                    }
-                ],
-                "primaryKey": [
-                    "country",
-                    "year"
-                ]
-            }
-        },
-        {
-            "path": "ddf--entities--country.csv",
-            "name": "ddf--entities--country",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "country"
-                    },
-                    {
-                        "name": "name"
-                    }
-                ],
-                "primaryKey": "country"
-            }
         }
     ],
     "ddfSchema": {
         "concepts": [
             {
-                "primaryKey": ["concept"],
-                "value": "name",
-                "resources": ["ddf--concepts"]
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "tags",
+                "resources": [
+                    "ddf--concepts"
+                ]
             },
             {
-                "primaryKey": ["concept"],
-                "value": "concept_type",
-                "resources": ["ddf--concepts"]
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "scales",
+                "resources": [
+                    "ddf--concepts"
+                ]
             },
             {
-                "primaryKey": ["concept"],
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "interpolation",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
                 "value": "indicator_url",
-                "resources": ["ddf--concepts"]
+                "resources": [
+                    "ddf--concepts"
+                ]
             },
             {
-                "primaryKey": ["concept"],
-                "value": "unit",
-                "resources": ["ddf--concepts"]
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "description",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name_short",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name_catalog",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "color",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "domain",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "drill_up",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "concept_type",
+                "resources": [
+                    "ddf--concepts"
+                ]
             }
         ],
         "entities": [
             {
-                "primaryKey": ["country"],
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "arb1",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "world_4region",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "longitude",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "world_6region",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "gwid",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "alternative_4_cdiac",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "iso3166_2",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "latitude",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "alt_5",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "income_groups",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "god_id",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "arb2",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "alternative_2",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "landlocked",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "upper_case_name",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "unicode_region_subtag",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "un_state",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "alternative_3",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "alternative_1",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "main_religion_2008",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "iso3166_1_alpha3",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
                 "value": "name",
-                "resources": ["ddf--entities--country"]
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "iso3166_1_numeric",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "arb6",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "arb3",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "pandg",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "arb4",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "iso3166_1_alpha2",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "g77_and_oecd_countries",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "gapminder_list",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "arb5",
+                "resources": [
+                    "ddf--entities--country"
+                ]
             }
         ],
         "datapoints": [
             {
-                "primaryKey": ["country","year"],
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
                 "value": "yearly_co2_emissions_1000_tonnes",
-                "resources": ["ddf--datapoints--yearly_co2_emissions_1000_tonnes--by--country--year"]
+                "resources": [
+                    "ddf--datapoints--yearly_co2_emissions_1000_tonnes--by--country--year"
+                ]
             },
             {
-                "primaryKey": ["country","year"],
-                "value": "cumulative_co2_emissions_tonnes",
-                "resources": ["ddf--datapoints--cumulative_co2_emissions_tonnes--by--country--year"]
-            },
-            {
-                "primaryKey": ["country","year"],
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
                 "value": "co2_emissions_tonnes_per_person",
-                "resources": ["ddf--datapoints--co2_emissions_tonnes_per_person--by--country--year"]
+                "resources": [
+                    "ddf--datapoints--co2_emissions_tonnes_per_person--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "cumulative_co2_emissions_tonnes",
+                "resources": [
+                    "ddf--datapoints--cumulative_co2_emissions_tonnes--by--country--year"
+                ]
             }
         ]
     }
