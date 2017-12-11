@@ -1,13 +1,13 @@
 info:
     id: ddf--gapminder--co2_emission
     base:
-        - &d1 ddf--cdiac--co2
-        - &d2 ddf--gapminder--population
-        - &d3 ddf--gapminder--geo_entity_domain
-        - &d4 ddf--gapminder--systema_globalis
+        - &d1 open-numbers/ddf--cdiac--co2
+        - &d2 open-numbers/ddf--gapminder--population
+        - &d3 open-numbers/ddf--gapminder--geo_entity_domain
+        - &d4 open-numbers/ddf--gapminder--systema_globalis
 
 config:
-    ddf_dir: /Users/semio/src/work/Gapminder/
+    ddf_dir: /Users/semio/src/work/Gapminder/airflow/datasets
     recipe_dir: ./
     dictionary_dir: ./translation_dictionaries
 
@@ -59,7 +59,6 @@ cooking:
               dictionary: country_split.json
               splitted: keep
               target_column: nation
-              debug: true
           result: cdiac-datapoints-country-merged-splitted
 
         # adapt to Gapminder's geo
@@ -77,7 +76,6 @@ cooking:
                   base: gapminder-entities
               not_found: drop
               ignore_case: true
-              debug: true
           result: geo-entities-aligned
 
         - procedure: translate_column
@@ -91,7 +89,6 @@ cooking:
                   value: geo
                   base: geo-entities-aligned
               not_found: drop
-              debug: true
           result: cdiac-datapoints-aligned
 
         - procedure: translate_header
@@ -108,7 +105,6 @@ cooking:
           options:
               op:
                   yearly_co2_emissions_1000_tonnes: total_carbon_emissions * 3.667
-              debug: true
           result: total_emissions-datapoints
 
         # create a new ingredient with co2 and population in it.
